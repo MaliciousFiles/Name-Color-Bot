@@ -60,24 +60,10 @@ def parse_color(color):
             _locals = locals()
             exec(f"rgb = discord.Colour.{color}().to_rgb()", globals(), _locals)
             rgb = _locals["rgb"]
-        except AttributeError or SyntaxEror:
+        except (AttributeError, SyntaxEror):
             return None
 
     return rgb
-
-# async def rainbow(ctx):
-#     index = 0
-#     while ctx.author in rainbow_threads:
-#         await set_namecolor(ctx, RAINBOW[index], True)
-#         index = (index + 1) % len(RAINBOW)
-#
-#         sleep(1)
-#
-# async def run_rainbow(ctx):
-#     await rainbow(ctx)
-#
-# def start_rainbow(ctx):
-#     asyncio.run_coroutine_threadsafe(run_rainbow(ctx), bot.loop)
 
 async def set_namecolor(ctx, color, rainbow_color=False):
     if not rainbow_color and ctx.author in rainbow_threads:
@@ -92,7 +78,7 @@ async def set_namecolor(ctx, color, rainbow_color=False):
 
     try:
         color = COLORS[int(color)-1].replace("_", " ")
-    except ValueError or IndexError:
+    except (ValueError, IndexError):
         pass
 
     display_color = ""
