@@ -60,7 +60,7 @@ def parse_color(color):
             _locals = locals()
             exec(f"rgb = discord.Colour.{color}().to_rgb()", globals(), _locals)
             rgb = _locals["rgb"]
-        except (AttributeError, SyntaxEror):
+        except (AttributeError, SyntaxError):
             return None
 
     return rgb
