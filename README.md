@@ -7,6 +7,4 @@
 > `token`: place token in this file, this will be loaded by vcping.py to authenticate
 with discord.
 >
-> `namecolorbot.py`: primary executable for vcping.
->
-> `namecolorbot.service`: systemd unit for deployment on a systemd
+> `namecolorchange.py`: primary executable for vcping.
