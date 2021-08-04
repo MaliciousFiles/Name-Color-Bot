@@ -213,4 +213,4 @@ async def help(ctx):
     """, colour=discord.Colour.green())
     await ctx.send(embed=embed)
 
-bot.run("ODQzMjEzOTI3Mjg1Nzg0NTc2.YKAmKg.-cjJ3UwmFj5WS-VFxbtiz_gtyUM")
+bot.run("token")
