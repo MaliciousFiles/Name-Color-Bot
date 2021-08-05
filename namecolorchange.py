@@ -2,10 +2,9 @@ from discord.ext import commands
 import discord
 import random
 from discord_slash import SlashCommand
-import colorsys
-from time import sleep
+from flask import Flask
 from threading import Thread
-import asyncio
+import os
 
 bot = commands.Bot(command_prefix=">", case_insensitive=True)
 bot.remove_command("help")
@@ -209,4 +208,15 @@ async def help(ctx):
     """, colour=discord.Colour.green())
     await ctx.send(embed=embed)
 
-bot.run("token")
+app = Flask('')
+
+@app.route('/')
+def home():
+    return ""
+
+def run():
+  app.run(host='0.0.0.0',port=8080)
+
+Thread(target=run).start()
+
+bot.run(os.environ["token"])
