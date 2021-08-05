@@ -10,6 +10,8 @@ discord = "^1.0.1"
 flask = "^1.1.2"
 discord-ext-slash = "^0.5.0"
 discord-py-slash-command = "^1.1.0"
+gevent = "^21.1.2"
+Flask-Compress = "^1.10.1"
 
 [tool.poetry.dev-dependencies]
 

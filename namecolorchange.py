@@ -1,8 +1,12 @@
+from gevent import monkey
+monkey.patch_all()
 from discord.ext import commands
 import discord
 import random
 from discord_slash import SlashCommand
 from flask import Flask
+from flask_compress import Compress
+from gevent.pywsgi import WSGIServer
 from threading import Thread
 import os
 
@@ -19,6 +23,8 @@ COLORS = ["default", "red", "dark_red", "orange", "dark_orange", "gold", "dark_g
 async def on_ready():
     for guild in bot.guilds:
         guildIDs.append(guild.id)
+
+    await bot.change_presence(activity=discord.Game(name=">help |  /help"))
 
 @bot.event
 async def on_guild_join(guild):
@@ -212,11 +218,13 @@ app = Flask('')
 
 @app.route('/')
 def home():
-    return ""
+    return "Name Color Change active!"
 
 def run():
-  app.run(host='0.0.0.0',port=8080)
+  WSGIServer(('0.0.0.0', 8080), app).serve_forever()
 
+compress = Compress()
+compress.init_app(app)
 Thread(target=run).start()
 
 bot.run(os.environ["token"])
