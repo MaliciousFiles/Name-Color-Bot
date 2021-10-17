@@ -182,6 +182,7 @@ async def help(ctx):
     embed = discord.Embed(title="NameColor Help", description="""
     ***Commands*** | Prefix is `>`, or slash command
     **namecolor <color>**: *Sets your name color to **<color>**, which can be a Hex [#ffffff], RGB [rgb(255, 255, 255)], or a Preset [white]. `None` to clear.*
+    **help**: *Shows this help page.*
     ------------------------------------------------------------
     ***Presets***
     >>> 1. Default
@@ -218,6 +219,7 @@ app = Flask('')
 
 @app.route('/')
 def home():
+    bot.run(os.environ["token"])
     return "Name Color Change active!"
 
 def run():
@@ -226,5 +228,3 @@ def run():
 compress = Compress()
 compress.init_app(app)
 Thread(target=run).start()
-
-bot.run(os.environ["token"])

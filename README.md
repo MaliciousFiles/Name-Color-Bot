@@ -8,3 +8,13 @@
 with discord.
 >
 > `namecolorchange.py`: primary executable for vcping.
+
+
+<!-- Adds a simple command that lets users change their name color to a Hex code, RGB, preset value, or random.
+
+<b><u>Commands</b></u> *(Prefix: `>`)*
+**namecolor \<color>**: *Sets your name color to **\<color>**, which can be a Hex \[#ffffff], RGB \[rgb(255, 255, 255)], or a Preset \[white]. `None` to clear.*
+ **help**: *Shows help page.*
+
+<br><b><u>Permissions</b></u><br>
+The only permission Name Color Change needs is Manage Roles. However, if you want to make sure the color role is above all the other roles you need to put the `@Name Color Change` role to the top of the roles list. -->
