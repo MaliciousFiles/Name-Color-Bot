@@ -200,5 +200,4 @@ async def help(ctx):
     """, colour=discord.Colour.green())
     await ctx.send(embed=embed)
 
-# bot.run(get_key(env_file, "token"))
-bot.run("ODQzMjEzOTI3Mjg1Nzg0NTc2.YKAmKg.bLG82qqhe_8SML3oWFqMJnv4CXs")
+bot.run(get_key(env_file, "token"))
