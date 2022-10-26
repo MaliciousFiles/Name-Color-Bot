@@ -215,16 +215,4 @@ async def help(ctx):
     """, colour=discord.Colour.green())
     await ctx.send(embed=embed)
 
-app = Flask('')
-
-@app.route('/')
-def home():
-    bot.run(os.environ["token"])
-    return "Name Color Change active!"
-
-def run():
-  WSGIServer(('0.0.0.0', 8080), app).serve_forever()
-
-compress = Compress()
-compress.init_app(app)
-Thread(target=run).start()
+bot.run(os.environ["token"])
