@@ -1,0 +1,2 @@
+discord-py-slash-command==4.2.1
+appdirs==1.4.4
