@@ -1,39 +1,27 @@
 from discord.ext import commands
 import discord
 import random
-from discord_slash import SlashCommand
 from dotenv import get_key
 from appdirs import user_data_dir
 import os
 
-env_file = os.path.join(user_data_dir("Name Color Change", "MaliciousFiles", roaming=True), ".env")
+roaming_dir = user_data_dir("Name Color Change", "MaliciousFiles", roaming=True)
+if not os.path.exists(roaming_dir):
+    os.makedirs(roaming_dir)
+
+env_file = os.path.join(roaming_dir, ".env")
 if not os.path.exists(env_file):
     with open(env_file, "x"):
         pass
 
-bot = commands.Bot(command_prefix=">", case_insensitive=True)
+bot = commands.Bot(command_prefix=">", case_insensitive=True, intents=discord.Intents(message_content=True))
 bot.remove_command("help")
-
-slash = SlashCommand(bot, sync_commands=True)
-
-guildIDs = []
 
 COLORS = ["default", "red", "dark_red", "orange", "dark_orange", "gold", "dark_gold", "green", "dark_green", "teal", "dark_teal", "blue", "dark_blue", "blurple", "magenta", "dark_magenta", "purple", "dark_purple", "greyple", "lighter_gray", "light_gray", "darkple", "gray", "dark_gray", "darker_gray", "dark_theme", "random", "expanded_random"]
 
 @bot.event
 async def on_ready():
-    for guild in bot.guilds:
-        guildIDs.append(guild.id)
-
-    await bot.change_presence(activity=discord.Game(name=">help |  /help"))
-
-@bot.event
-async def on_guild_join(guild):
-    guildIDs.append(guild.id)
-
-@bot.event
-async def on_guild_remove(guild):
-    guildIDs.remove(guild.id)
+    await bot.change_presence(activity=discord.Game(name=">help"))
 
 def parse_color(color):
     rgb = None
@@ -170,10 +158,6 @@ async def set_namecolor(ctx, member, color):
 
     await send_success_msg(ctx, display_name+f"ame color successfully changed to **{display_color}**!", disc_color)
 
-@slash.slash(description="Pick your color using Hex [#ffffff], RGB [rgb(255, 255, 255)], or a Preset [white]", guild_ids=guildIDs)
-async def namecolor(ctx, color, member=None):
-    await set_namecolor(ctx, member, color)
-
 @bot.command(name="namecolor")
 async def namecolor_bot(ctx, color, member=None):
     await set_namecolor(ctx, member, color)
@@ -181,7 +165,7 @@ async def namecolor_bot(ctx, color, member=None):
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(title="NameColor Help", description="""
-    ***Commands*** | Prefix is `>`, or slash command
+    ***Commands*** | Prefix is `>`
     **namecolor <color>**: *Sets your name color to **<color>**, which can be a Hex [#ffffff], RGB [rgb(255, 255, 255)], or a Preset [white]. `None` to clear.*
     **help**: *Shows this help page.*
     ------------------------------------------------------------
@@ -216,4 +200,5 @@ async def help(ctx):
     """, colour=discord.Colour.green())
     await ctx.send(embed=embed)
 
-bot.run(get_key(env_file, "token"))
+# bot.run(get_key(env_file, "token"))
+bot.run("ODQzMjEzOTI3Mjg1Nzg0NTc2.YKAmKg.bLG82qqhe_8SML3oWFqMJnv4CXs")
