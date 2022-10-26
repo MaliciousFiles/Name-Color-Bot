@@ -1,14 +1,15 @@
-from gevent import monkey
-monkey.patch_all()
 from discord.ext import commands
 import discord
 import random
 from discord_slash import SlashCommand
-from flask import Flask
-from flask_compress import Compress
-from gevent.pywsgi import WSGIServer
-from threading import Thread
+from dotenv import get_key
+from appdirs import user_data_dir
 import os
+
+env_file = os.path.join(user_data_dir("Name Color Change", "MaliciousFiles", roaming=True), ".env")
+if not os.path.exists(env_file):
+    with open(env_file, "x"):
+        pass
 
 bot = commands.Bot(command_prefix=">", case_insensitive=True)
 bot.remove_command("help")
@@ -215,4 +216,4 @@ async def help(ctx):
     """, colour=discord.Colour.green())
     await ctx.send(embed=embed)
 
-bot.run(os.environ["token"])
+bot.run(get_key(env_file, "token"))
